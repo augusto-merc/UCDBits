@@ -1,24 +1,17 @@
-def star(n, x, i=0, c=0, d=[]):
-    if i < 0 or i > n-1 or x[i] == 0:
-        return (len(d), c)
-    
-    if x[i] % 2 != 0:
-        x[i] -= 1
-        if i not in d:
-            d.append(i)
-        return star(n, x, i+1, c+1, d)
-    
-    x[i] -= 1
-    if i not in d:
-        d.append(i)
-    return star(n, x, i-1, c+1, d)
-    ...
-
 n = int(input())
 
-x = [int(_) for _ in input().split()]
+x = list(map(int, input().split()))
+
 s = sum(x)
 
-r = star(n, x)
+i = 0
+a = set()
+while 0 <= i < n:
+    a.add(i)
+    temp = -1 if x[i] % 2 == 0 else 1
+    if x[i] > 0:
+        x[i] -= 1
+        s -= 1
+    i += temp
 
-print(r[0], s - r[1])
+print(len(a), s)
